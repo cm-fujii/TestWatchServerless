@@ -8,10 +8,10 @@ Globals:
 
 Resources:
 
-  HelloWorldFunction:
+  HelloWorldFunction1:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: hello_world/
+      CodeUri: src/lambda1
       Handler: app.lambda_handler
       Runtime: python3.6
       Environment:

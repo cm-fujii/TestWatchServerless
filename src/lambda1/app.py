@@ -15,6 +15,9 @@ def lambda_handler(event, context):
         Payload=json.dumps(param)
     )
 
+    # 強制的にエラー発生させる
+    raise NotImplementedError()
+
     return {
         "statusCode": 200,
         "body": json.dumps({

@@ -38,6 +38,17 @@ Resources:
       CodeUri: src/lambda2
       Handler: app.lambda_handler
       Runtime: python3.6
+  NotifySlackFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/notify_slack
+      Handler: app.lambda_handler
+      Runtime: python3.6
+      Events:
+        SnsTopic:
+          Type: SNS
+          Properties:
+            Topic: !Ref TestWatchServerlessAlarmTopic
   AlarmFunction1Errors:
     Type: AWS::CloudWatch::Alarm
     Properties:

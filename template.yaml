@@ -65,7 +65,7 @@ Resources:
       ComparisonOperator: GreaterThanOrEqualToThreshold  # 閾値以上
       Period: 60  # 期間[s]
       EvaluationPeriods: 1  # 閾値を超えた回数
-      Statistic: Minimum  # 最小
+      Statistic: Maximum  # 最大
       Threshold: 1  # 閾値
       AlarmActions:
         - !Ref TestWatchServerlessAlarmTopic  # アラーム発生時のアクション
@@ -83,7 +83,7 @@ Resources:
       ComparisonOperator: GreaterThanOrEqualToThreshold  # 閾値以上
       Period: 60  # 期間[s]
       EvaluationPeriods: 1  # 閾値を超えた回数
-      Statistic: Minimum  # 最小
+      Statistic: Maximum  # 最大
       Threshold: 1  # 閾値
       AlarmActions:
         - !Ref TestWatchServerlessAlarmTopic  # アラーム発生時のアクション

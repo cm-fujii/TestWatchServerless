@@ -8,6 +8,12 @@ Globals:
 
 Resources:
 
+  TestWatchServerlessAlarmTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: TestWatchServerlessAlarmTopic
+      DisplayName: TestWatchServerlessAlarmTopic
+
   HelloWorldFunction1:
     Type: AWS::Serverless::Function
     Properties:

@@ -32,6 +32,36 @@ Resources:
       CodeUri: src/lambda2
       Handler: app.lambda_handler
       Runtime: python3.6
+  AlarmFunction1Errors:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      Namespace: AWS/Lambda
+      Dimensions:
+        - Name: Resource
+          Value: !Ref HelloWorldFunction1
+        - Name: FunctionName
+          Value: !Ref HelloWorldFunction1
+      MetricName: Errors
+      ComparisonOperator: GreaterThanOrEqualToThreshold  # 閾値以上
+      Period: 60  # 期間[s]
+      EvaluationPeriods: 1  # 閾値を超えた回数
+      Statistic: Minimum  # 最小
+      Threshold: 1  # 閾値
+  AlarmFunction2Errors:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      Namespace: AWS/Lambda
+      Dimensions:
+        - Name: Resource
+          Value: !Ref HelloWorldFunction2
+        - Name: FunctionName
+          Value: !Ref HelloWorldFunction2
+      MetricName: Errors
+      ComparisonOperator: GreaterThanOrEqualToThreshold  # 閾値以上
+      Period: 60  # 期間[s]
+      EvaluationPeriods: 1  # 閾値を超えた回数
+      Statistic: Minimum  # 最小
+      Threshold: 1  # 閾値
 
 Outputs:
 

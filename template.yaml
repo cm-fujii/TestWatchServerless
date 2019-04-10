@@ -32,12 +32,14 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+
   HelloWorldFunction2:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: src/lambda2
       Handler: app.lambda_handler
       Runtime: python3.6
+
   NotifySlackFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -49,6 +51,7 @@ Resources:
           Type: SNS
           Properties:
             Topic: !Ref TestWatchServerlessAlarmTopic
+
   AlarmFunction1Errors:
     Type: AWS::CloudWatch::Alarm
     Properties:
@@ -64,6 +67,7 @@ Resources:
       EvaluationPeriods: 1  # 閾値を超えた回数
       Statistic: Minimum  # 最小
       Threshold: 1  # 閾値
+
   AlarmFunction2Errors:
     Type: AWS::CloudWatch::Alarm
     Properties:

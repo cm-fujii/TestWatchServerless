@@ -55,6 +55,7 @@ Resources:
   AlarmFunction1Errors:
     Type: AWS::CloudWatch::Alarm
     Properties:
+      AlarmName: Lambda1Errors
       Namespace: AWS/Lambda
       Dimensions:
         - Name: Resource
@@ -73,6 +74,7 @@ Resources:
   AlarmFunction2Errors:
     Type: AWS::CloudWatch::Alarm
     Properties:
+      AlarmName: Lambda2Errors
       Namespace: AWS/Lambda
       Dimensions:
         - Name: Resource

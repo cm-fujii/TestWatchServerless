@@ -23,6 +23,12 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+  HelloWorldFunction2:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/lambda2
+      Handler: app.lambda_handler
+      Runtime: python3.6
 
 Outputs:
 

@@ -67,6 +67,8 @@ Resources:
       EvaluationPeriods: 1  # 閾値を超えた回数
       Statistic: Minimum  # 最小
       Threshold: 1  # 閾値
+      AlarmActions:
+        - !Ref TestWatchServerlessAlarmTopic  # アラーム発生時のアクション
 
   AlarmFunction2Errors:
     Type: AWS::CloudWatch::Alarm
@@ -83,6 +85,8 @@ Resources:
       EvaluationPeriods: 1  # 閾値を超えた回数
       Statistic: Minimum  # 最小
       Threshold: 1  # 閾値
+      AlarmActions:
+        - !Ref TestWatchServerlessAlarmTopic  # アラーム発生時のアクション
 
 Outputs:
 

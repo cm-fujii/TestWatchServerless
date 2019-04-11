@@ -5,6 +5,8 @@ build:
 	sam build
 
 deploy:
+	aws s3 cp TestWatchServerlessApi.yaml s3://$(BUCKET)/TestWatchServerlessApi.yaml
+
 	sam package \
 		--output-template-file packaged.yaml \
 		--s3-bucket $(BUCKET)

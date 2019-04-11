@@ -20,6 +20,16 @@ Resources:
       TopicName: TestWatchServerlessDLQTopic
       DisplayName: TestWatchServerlessDLQTopic
 
+  HelloWorldApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      DefinitionBody:
+        Fn::Transform:
+          Name: AWS::Include
+          Parameters:
+            Location: s3://cm-fujii.genki-sam-test-bucket/TestWatchServerlessApi.yaml
+
   HelloWorldFunction1:
     Type: AWS::Serverless::Function
     Properties:
@@ -38,6 +48,7 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+            RestApiId: !Ref HelloWorldApi
 
   HelloWorldFunction2:
     Type: AWS::Serverless::Function
@@ -107,5 +118,5 @@ Outputs:
 
   HelloWorldApi:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+    Value: !Sub "https://${HelloWorldApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
 

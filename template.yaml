@@ -14,6 +14,12 @@ Resources:
       TopicName: TestWatchServerlessAlarmTopic
       DisplayName: TestWatchServerlessAlarmTopic
 
+  TestWatchServerlessDLQTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: TestWatchServerlessDLQTopic
+      DisplayName: TestWatchServerlessDLQTopic
+
   HelloWorldFunction1:
     Type: AWS::Serverless::Function
     Properties:
@@ -39,6 +45,9 @@ Resources:
       CodeUri: src/lambda2
       Handler: app.lambda_handler
       Runtime: python3.6
+      DeadLetterQueue:
+        Type: SNS
+        TargetArn: !Ref TestWatchServerlessDLQTopic
 
   NotifySlackFunction:
     Type: AWS::Serverless::Function

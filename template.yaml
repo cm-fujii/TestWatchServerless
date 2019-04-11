@@ -56,10 +56,14 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.6
       Events:
-        SnsTopic:
+        SnsAlarmTopic:
           Type: SNS
           Properties:
             Topic: !Ref TestWatchServerlessAlarmTopic
+        SnsDLQTopic:
+          Type: SNS
+          Properties:
+            Topic: !Ref TestWatchServerlessDLQTopic
 
   AlarmFunction1Errors:
     Type: AWS::CloudWatch::Alarm

@@ -114,6 +114,25 @@ Resources:
       AlarmActions:
         - !Ref TestWatchServerlessAlarmTopic  # アラーム発生時のアクション
 
+  AlarmApi5XXError:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: Api5XXError
+      Namespace: AWS/ApiGateway
+      Dimensions:
+        - Name: ApiName
+          Value: Test Watch Serverless API  # Swaggerファイルの title に合わせる
+        - Name: Stage
+          Value: Prod
+      MetricName: 5XXError
+      ComparisonOperator: GreaterThanOrEqualToThreshold  # 閾値以上
+      Period: 60  # 期間[s]
+      EvaluationPeriods: 1  # 閾値を超えた回数
+      Statistic: Maximum  # 最大
+      Threshold: 1  # 閾値
+      AlarmActions:
+        - !Ref TestWatchServerlessAlarmTopic  # アラーム発生時のアクション
+
 Outputs:
 
   HelloWorldApi:

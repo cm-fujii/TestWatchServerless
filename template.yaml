@@ -5,6 +5,10 @@ Globals:
   Function:
     Timeout: 3
 
+Parameters:
+  SlackWebhookUrl:
+    Type: String
+    Default: hoge
 
 Resources:
 
@@ -66,6 +70,10 @@ Resources:
       CodeUri: src/notify_slack
       Handler: app.lambda_handler
       Runtime: python3.6
+      Environment:
+        Variables:
+          # このURLはコミット＆公開したくないため、デプロイ時にコマンドで設定する
+          SLACK_WEBHOOK_URL: !Ref SlackWebhookUrl
       Events:
         SnsAlarmTopic:
           Type: SNS

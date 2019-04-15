@@ -12,18 +12,21 @@ Parameters:
 
 Resources:
 
+  # CloudWatchアラーム用のTopic
   TestWatchServerlessAlarmTopic:
     Type: AWS::SNS::Topic
     Properties:
       TopicName: TestWatchServerlessAlarmTopic
       DisplayName: TestWatchServerlessAlarmTopic
 
+  # DLQ用のTopic
   TestWatchServerlessDLQTopic:
     Type: AWS::SNS::Topic
     Properties:
       TopicName: TestWatchServerlessDLQTopic
       DisplayName: TestWatchServerlessDLQTopic
 
+  # API Gatewayの定義
   HelloWorldApi:
     Type: AWS::Serverless::Api
     Properties:
@@ -34,6 +37,7 @@ Resources:
           Parameters:
             Location: s3://cm-fujii.genki-sam-test-bucket/TestWatchServerlessApi.yaml
 
+  # Lambda1の定義（API Gatewayの裏側）
   HelloWorldFunction1:
     Type: AWS::Serverless::Function
     Properties:
@@ -54,6 +58,7 @@ Resources:
             Method: get
             RestApiId: !Ref HelloWorldApi
 
+  # Lambda2の定義（非同期実行される側）
   HelloWorldFunction2:
     Type: AWS::Serverless::Function
     Properties:
@@ -64,6 +69,7 @@ Resources:
         Type: SNS
         TargetArn: !Ref TestWatchServerlessDLQTopic
 
+  # Lambda3の定義（Slack通知用）
   NotifySlackFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -84,6 +90,7 @@ Resources:
           Properties:
             Topic: !Ref TestWatchServerlessDLQTopic
 
+  # CloudWatchアラームの定義（Lambda1のErros用）
   AlarmFunction1Errors:
     Type: AWS::CloudWatch::Alarm
     Properties:
@@ -103,6 +110,7 @@ Resources:
       AlarmActions:
         - !Ref TestWatchServerlessAlarmTopic  # アラーム発生時のアクション
 
+  # CloudWatchアラームの定義（Lambda2のErros用）
   AlarmFunction2Errors:
     Type: AWS::CloudWatch::Alarm
     Properties:
@@ -122,6 +130,7 @@ Resources:
       AlarmActions:
         - !Ref TestWatchServerlessAlarmTopic  # アラーム発生時のアクション
 
+  # CloudWatchアラームの定義（API Gatewayの5XXError用）
   AlarmApi5XXError:
     Type: AWS::CloudWatch::Alarm
     Properties:

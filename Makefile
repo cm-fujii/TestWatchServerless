@@ -16,3 +16,6 @@ deploy:
 		--stack-name TestWatchServerless \
 		--capabilities CAPABILITY_IAM \
 		--parameter-overrides SlackWebhookUrl=$(SLACK_WEBHOOK_URL)
+
+delete:
+	aws cloudformation delete-stack --stack-name TestWatchServerless
